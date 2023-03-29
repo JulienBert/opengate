@@ -17,7 +17,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [ubuntu-latest, windows-latest]
         python-version: [3.8, 3.9, '3.10', '3.11']
         exclude:
           - os: macos-latest
@@ -278,7 +278,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
+        os: [ubutun-latest, windows-latest]
         python-version: [3.8, 3.9, '3.10', '3.11']
         exclude:
           - os: macos-latest
@@ -294,27 +294,28 @@ jobs:
         python-version: ${{ matrix.python-version }}
         architecture: 'x64'
     - name: Run tests
+      shell: bash -l {0}
       run: |
-          if [ ${{ matrix.python-version }} == "3.8" ]; then
+          if [[ ${{ matrix.python-version }} == "3.8" ]]; then
             export PYTHONFOLDER="cp38-cp38"
-          elif [ ${{ matrix.python-version }} == "3.9" ]; then
+          elif [[ ${{ matrix.python-version }} == "3.9" ]]; then
             export PYTHONFOLDER="cp39-cp39"
-          elif [ ${{ matrix.python-version }} == "3.10" ]; then
+          elif [[ ${{ matrix.python-version }} == "3.10" ]]; then
             export PYTHONFOLDER="cp310-cp310"
             pip install --pre itk
-          elif [ ${{ matrix.python-version }} == "3.11" ]; then
+          elif [[ ${{ matrix.python-version }} == "3.11" ]]; then
             export PYTHONFOLDER="cp311-cp311"
             pip install --pre itk
           fi
-          if  [ ${{ matrix.os }} == "ubuntu-latest" ]; then
+          if [[ ${{ matrix.os }} == "ubuntu-latest" ]]; then
             export OSNAME="manylinux"
             export PLATFORM="x86_"
             pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
-          elif [ ${{ matrix.os }} == "macos-latest" ]; then
+          elif [[ ${{ matrix.os }} == "macos-latest" ]]; then
             export OSNAME="macosx"
             export PLATFORM="x86_"
             pip install torch
-          elif [ ${{ matrix.os }} == "windows-latest" ]; then
+          elif [[ ${{ matrix.os }} == "windows-latest" ]]; then
             export OSNAME="win"
             export PLATFORM="amd"
             pip install torch
@@ -324,7 +325,7 @@ jobs:
           pip install dist/opengate_core-*-${PYTHONFOLDER}-${OSNAME}*_${PLATFORM}64.whl
           pip install dist/opengate-*.whl
           export GIT_SSL_NO_VERIFY=1
-          if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
+          if [[ ${{ matrix.os }} == "ubuntu-latest" ]]; then
               path=`opengate_tests_utils -p site_packages`
               export LD_LIBRARY_PATH="${path}/opengate_core.libs":${LD_LIBRARY_PATH}
               path=`opengate_tests_utils -p libG4processes`
@@ -335,7 +336,7 @@ jobs:
           OutputTest=$(opengate_tests)
           echo "$OutputTest"
           OutputTest=$(echo "$OutputTest" | tail -1)
-          if [ "$OutputTest" != "True" ]; then
+          if [[ "$OutputTest" != "True" ]]; then
               exit -1
           else
               exit 0
