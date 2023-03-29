@@ -278,7 +278,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [windows-latest]
         python-version: [3.8, 3.9, '3.10', '3.11']
         exclude:
           - os: macos-latest
@@ -308,14 +308,20 @@ jobs:
           fi
           if  [ ${{ matrix.os }} == "ubuntu-latest" ]; then
             export OSNAME="manylinux"
+            export PLATFORM="x86_"
             pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
           elif [ ${{ matrix.os }} == "macos-latest" ]; then
             export OSNAME="macosx"
+            export PLATFORM="x86_"
+            pip install torch
+          elif [ ${{ matrix.os }} == "windows-latest" ]; then
+            export OSNAME="win"
+            export PLATFORM="amd"
             pip install torch
           fi
           pip install gaga_phsp
           pip install garf
-          pip install dist/opengate_core-*-${PYTHONFOLDER}-${OSNAME}*_x86_64.whl
+          pip install dist/opengate_core-*-${PYTHONFOLDER}-${OSNAME}*_${PLATFORM}64.whl
           pip install dist/opengate-*.whl
           export GIT_SSL_NO_VERIFY=1
           if [ "${{ matrix.os }}" == "ubuntu-latest" ]; then
