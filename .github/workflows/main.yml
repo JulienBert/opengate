@@ -233,13 +233,13 @@ jobs:
           export CMAKE_PREFIX_PATH=$HOME/software/geant4/bin:$HOME/software/itk/bin/:${CMAKE_PREFIX_PATH}
           cd core
           if [[ ${{ matrix.python-version }} == "3.8" ]]; then
-            export CIBW_BUILD="cp38-win_64"
+            export CIBW_BUILD="cp38-win_amd64"
           elif [[ ${{ matrix.python-version }} == "3.9" ]]; then
-            export CIBW_BUILD="cp39-macosx_x86_64"
+            export CIBW_BUILD="cp39-win_amd64"
           elif [[ ${{ matrix.python-version }} == "3.10" ]]; then
-            export CIBW_BUILD="cp310-macosx_x86_64"
+            export CIBW_BUILD="cp310-win_amd64"
           elif [[ ${{ matrix.python-version }} == "3.11" ]]; then
-            export CIBW_BUILD="cp310-macosx_x86_64"
+            export CIBW_BUILD="cp310-win_amd64"
           fi
           export CIBW_BEFORE_BUILD="python -m pip install colored"
           python -m cibuildwheel --output-dir dist
