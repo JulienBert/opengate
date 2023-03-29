@@ -232,6 +232,8 @@ jobs:
           export CMAKE_PREFIX_PATH=$HOME/software/geant4/bin:$HOME/software/itk/bin/:${CMAKE_PREFIX_PATH}
           cd core
           python setup.py sdist bdist_wheel
+          cd ..
+          mv core/dist .
     - name: Upload wheels
       uses: actions/upload-artifact@v3
       with:
