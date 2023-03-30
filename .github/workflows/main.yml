@@ -242,7 +242,6 @@ jobs:
             export CIBW_BUILD="cp310-win_amd64"
           fi
           export CIBW_BEFORE_BUILD="python -m pip install colored"
-          export set PATH=C:\hostedtoolcache\windows\python\3.8.10\x64\lib\site-packages\opengate_core\;%PATH%
           python -m cibuildwheel --output-dir dist
           cd ..
           mv core/dist .
