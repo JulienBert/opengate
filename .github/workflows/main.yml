@@ -242,6 +242,7 @@ jobs:
             export CIBW_BUILD="cp310-win_amd64"
           fi
           export CIBW_BEFORE_BUILD="python -m pip install colored"
+          export set PATH=C:\hostedtoolcache\windows\python\3.8.10\x64\lib\site-packages\opengate_core\;%PATH%
           python -m cibuildwheel --output-dir dist
           cd ..
           mv core/dist .
@@ -343,6 +344,8 @@ jobs:
               export LD_PRELOAD=${path}:${LD_PRELOAD}
               path=`opengate_tests_utils -p libG4geometry`
               export LD_PRELOAD=${path}:${LD_PRELOAD}
+          elif [[ ${{ matrix.os }} == "windows-latest" ]]; then
+              export set PATH=C:\hostedtoolcache\windows\python\3.8.10\x64\lib\site-packages\opengate_core\;%PATH%
           fi
           OutputTest=$(opengate_tests)
           echo "$OutputTest"
