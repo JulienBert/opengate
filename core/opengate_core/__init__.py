@@ -58,6 +58,7 @@ if sys.platform == "linux" or sys.platform == "linux2":
             )
             sys.exit(-1)
 elif sys.platform == "win32":
+    print(os.path.dirname(pathCurrentFile))
     os.add_dll_directory(os.path.dirname(pathCurrentFile))
 
 from .opengate_core import *
