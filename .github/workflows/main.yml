@@ -343,8 +343,6 @@ jobs:
               export LD_PRELOAD=${path}:${LD_PRELOAD}
               path=`opengate_tests_utils -p libG4geometry`
               export LD_PRELOAD=${path}:${LD_PRELOAD}
-          elif [[ ${{ matrix.os }} == "windows-latest" ]]; then
-              export set PATH=C:\hostedtoolcache\windows\Python\3.10.10\x64\Scripts\;C:\hostedtoolcache\windows\python\3.8.10\x64\lib\site-packages\opengate_core\;%PATH%
           fi
           OutputTest=$(opengate_tests)
           echo "$OutputTest"

@@ -57,7 +57,8 @@ if sys.platform == "linux" or sys.platform == "linux2":
                 + ":${LD_PRELOAD}"
             )
             sys.exit(-1)
-
+elif sys.platform == 'win32':
+    os.add_dll_directory(os.path.dirname(pathCurrentFile))
 
 from .opengate_core import *
 from .g4DataSetup import *
