@@ -5,11 +5,11 @@ Sources are the objects that create particles *ex nihilo*. The particles created
 Several sources can be defined and are managed at the same time. To add a source description to the simulation, you do:
 
 ```python
-source1 = sim.add_source('Generic', 'MySource')
+source1 = sim.add_source('GenericSource', 'MySource')
 source1.n = 100
 
 Bq = gate.g4_units('Bq')
-source2 = sim.add_source('Voxels', 'MySecondSource')
+source2 = sim.add_source('VoxelsSource', 'MySecondSource')
 source2.activity = 10 * Bq
 ```
 
@@ -34,7 +34,7 @@ from scipy.spatial.transform import Rotation  # used to describe a rotation matr
 
 MeV = gate.g4_units('MeV')
 Bq = gate.g4_units('Bq')
-source = sim.add_source('Generic', 'mysource')
+source = sim.add_source('GenericSource', 'mysource')
 source.mother = 'my_volume'
 source.particle = 'proton'
 source.activity = 10000 * Bq
@@ -72,7 +72,7 @@ It is possible to indicate a `angle_acceptance_volume` to the direction of a sou
 Source of ion can be set with the following (see `test013`)
 
 ```python
-source1 = sim.add_source('Generic', 'ion1')
+source1 = sim.add_source('GenericSource', 'ion1')
 source1.particle = 'ion 9 18'  # Fluorine18
 source2 = sim.add_source('Generic', 'ion2')
 source2.particle = 'ion 53 124'  # Iodine 124
@@ -81,7 +81,7 @@ source2.particle = 'ion 53 124'  # Iodine 124
 There is some predefined energy spectrum of positron (e+):
 
 ```python
-source = sim.add_source('Generic', 'Default')
+source = sim.add_source('GenericSource', 'Default')
 source.particle = 'e+'
 source.energy.type = 'F18'  # F18 or Ga68 or C11 ...
 ```
@@ -97,7 +97,7 @@ All options have a default values and can be printed with `print(source)`.
 Voxelized sources can be described as follows:
 
 ```python
-source = sim.add_source('Voxels', 'vox')
+source = sim.add_source('VoxelsSource', 'vox')
 source.particle = 'e-'
 source.activity = 4000 * Bq
 source.image = 'an_activity_image.mhd'
