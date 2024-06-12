@@ -40,6 +40,7 @@ dose.size = [99, 99, 99]
 mm = gate.g4_units.mm
 dose.spacing = [2 * mm, 2 * mm, 2 * mm]
 dose.translation = [2 * mm, 3 * mm, -2 * mm]
+dose.dose = True
 dose.uncertainty = True
 dose.hit_type = "random"
 ````
